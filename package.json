@@ -16,5 +16,9 @@
     "eslint": "^8.57.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "graphql": "^16.8.1"
   }
 }
