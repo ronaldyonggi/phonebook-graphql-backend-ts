@@ -26,6 +26,11 @@ let persons = [
 
 const typeDefs = `#graphql
 
+  type Address {
+    street: String!
+    city: String!
+  }
+
   type Person {
     name: String!
     phone: String
