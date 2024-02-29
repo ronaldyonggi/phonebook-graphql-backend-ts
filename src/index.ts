@@ -34,8 +34,7 @@ const typeDefs = `#graphql
   type Person {
     name: String!
     phone: String
-    street: String!
-    city: String!
+    address: Address!
     id: ID!
   }
 
