@@ -20,6 +20,7 @@ export const typeDefs = `#graphql
 
   type Mutation {
     addPerson (person: AddPersonInput!): Person
+    editNumber(person: EditPersonInput): Person
   }
 
   input AddPersonInput {
@@ -27,6 +28,11 @@ export const typeDefs = `#graphql
     phone: Int
     street: String!
     city: String!
+  }
+
+  input EditPersonInput {
+    name: String!
+    phone: String!
   }
 
   enum YesNo {
