@@ -17,4 +17,15 @@ export const typeDefs = `#graphql
     allPersons: [Person!]!
     findPerson(name: String!): Person
   }
+
+  type Mutation {
+    addPerson (person: AddPersonInput!): Person
+  }
+
+  input AddPersonInput {
+    name: String!
+    phone: Int
+    street: String!
+    city: String!
+  }
 `;
