@@ -56,5 +56,18 @@ export const resolvers = {
       };
       persons = persons.concat(newPerson);
     },
+    editNumber: (_root, args) => {
+      // First find if the argument name exist in the db
+      const matchingPerson = persons.find(p => p.name === args.name)
+      if (!matchingPerson) {
+        return null;
+      }
+
+      // Update persons
+      const updatedPerson = { ...matchingPerson, phone: args.phone }
+      persons = persons.map(p => p.name === args.name ? updatedPerson : p)
+      return updatedPerson
+
+    }
   },
 };
