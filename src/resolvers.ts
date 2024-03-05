@@ -1,6 +1,5 @@
 import db from './_db';
 import { v1 as uuid } from 'uuid';
-import { Person } from './types';
 import { GraphQLError } from 'graphql';
 
 let persons = db.persons;
@@ -8,7 +7,26 @@ let persons = db.persons;
 export const resolvers = {
   Query: {
     personCount: () => persons.length,
-    allPersons: () => persons,
+    allPersons: (_root, args) => {
+      // If argument phone yesno is not provided, simply return all persons
+      if (!args.phone) {
+        return persons;
+      }
+
+      /**
+       * byPhone is a helper filter function. If the args.phone argument === YES,
+       * - If the person has person.phone property, return true
+       * - otherwise return false
+       * 
+       * Meanwhile if the args.phone argument === NO,
+       * - If the person has person.phone property, return False
+       * - otherwise return true
+       * @param person a person object
+       * @returns boolean depending on the value of args.phone and whether person.phone is present
+       */
+      const byPhone = person => args.phone === 'YES' ? person.phone : !person.phone
+      return persons.filter(byPhone);
+    },
     findPerson: (_root: unknown, args: { name: string }) =>
       persons.find((p) => p.name === args.name),
   },
@@ -21,7 +39,7 @@ export const resolvers = {
     },
   },
   Mutation: {
-    addPerson: (_root: unknown, args: Person ) => {
+    addPerson: (_root: unknown, args ) => {
       // If the name already exist, throw error
       if (persons.find(p => p.name === args.name)) {
         throw new GraphQLError('Name must be unique!', {
@@ -31,7 +49,7 @@ export const resolvers = {
           }
         });
       }
-      const newPerson: Person = {
+      const newPerson = {
         ...args,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
         id: uuid(),
