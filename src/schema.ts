@@ -14,7 +14,7 @@ export const typeDefs = `#graphql
 
   type Query {
     personCount: Int!
-    allPersons: [Person!]!
+    allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
   }
 
@@ -27,5 +27,10 @@ export const typeDefs = `#graphql
     phone: Int
     street: String!
     city: String!
+  }
+
+  enum YesNo {
+    YES
+    NO
   }
 `;
