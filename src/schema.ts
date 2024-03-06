@@ -23,13 +23,6 @@ export const typeDefs = `#graphql
     editNumber(person: EditPersonInput): Person
   }
 
-  input AddPersonInput {
-    name: String!
-    phone: Int
-    street: String!
-    city: String!
-  }
-
   input EditPersonInput {
     name: String!
     phone: String!
