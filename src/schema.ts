@@ -19,7 +19,12 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    addPerson (person: AddPersonInput!): Person
+    addPerson (
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
     editNumber(person: EditPersonInput): Person
   }
 
