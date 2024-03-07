@@ -25,12 +25,10 @@ export const typeDefs = `#graphql
       street: String!
       city: String!
     ): Person
-    editNumber(person: EditPersonInput): Person
-  }
-
-  input EditPersonInput {
-    name: String!
-    phone: String!
+    editNumber(
+      name: String!
+      phone: String!
+    ): Person
   }
 
   enum YesNo {
